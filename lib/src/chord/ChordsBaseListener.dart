@@ -1,62 +1,70 @@
-// Generated from LatexPart.g4 by ANTLR 4.13.1
+// Generated from Chords.g4 by ANTLR 4.13.1
 // ignore_for_file: unused_import, unused_local_variable, prefer_single_quotes
 import 'package:antlr4/antlr4.dart';
 
-import 'LatexPartParser.dart';
-import 'LatexPartListener.dart';
+import 'ChordsParser.dart';
+import 'ChordsListener.dart';
 
 
-/// This class provides an empty implementation of [LatexPartListener],
+/// This class provides an empty implementation of [ChordsListener],
 /// which can be extended to create a listener which only needs to handle
 /// a subset of the available methods.
-class LatexPartBaseListener implements LatexPartListener {
+class ChordsBaseListener implements ChordsListener {
   /// The default implementation does nothing.
   @override
-  void enterPart(PartContext ctx) {}
+  void enterTestfile(TestfileContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void exitPart(PartContext ctx) {}
+  void exitTestfile(TestfileContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void enterPartcontent(PartcontentContext ctx) {}
+  void enterChord(ChordContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void exitPartcontent(PartcontentContext ctx) {}
+  void exitChord(ChordContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void enterElement(ElementContext ctx) {}
+  void enterKey(KeyContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void exitElement(ElementContext ctx) {}
+  void exitKey(KeyContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void enterRaised(RaisedContext ctx) {}
+  void enterMod(ModContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void exitRaised(RaisedContext ctx) {}
+  void exitMod(ModContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void enterCommand(CommandContext ctx) {}
+  void enterSus(SusContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void exitCommand(CommandContext ctx) {}
+  void exitSus(SusContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void enterReg_group(Reg_groupContext ctx) {}
+  void enterAdd(AddContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void exitReg_group(Reg_groupContext ctx) {}
+  void exitAdd(AddContext ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void enterMaj(MajContext ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void exitMaj(MajContext ctx) {}
 
   /// The default implementation does nothing.
   @override

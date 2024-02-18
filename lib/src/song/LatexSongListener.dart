@@ -10,7 +10,6 @@ abstract class LatexSongListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexSongParser.prog].
   /// [ctx] the parse tree
   void enterProg(ProgContext ctx);
-
   /// Exit a parse tree produced by [LatexSongParser.prog].
   /// [ctx] the parse tree
   void exitProg(ProgContext ctx);
@@ -18,7 +17,6 @@ abstract class LatexSongListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexSongParser.song].
   /// [ctx] the parse tree
   void enterSong(SongContext ctx);
-
   /// Exit a parse tree produced by [LatexSongParser.song].
   /// [ctx] the parse tree
   void exitSong(SongContext ctx);
@@ -26,7 +24,6 @@ abstract class LatexSongListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexSongParser.reg_group].
   /// [ctx] the parse tree
   void enterReg_group(Reg_groupContext ctx);
-
   /// Exit a parse tree produced by [LatexSongParser.reg_group].
   /// [ctx] the parse tree
   void exitReg_group(Reg_groupContext ctx);
@@ -34,7 +31,6 @@ abstract class LatexSongListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexSongParser.sub_group].
   /// [ctx] the parse tree
   void enterSub_group(Sub_groupContext ctx);
-
   /// Exit a parse tree produced by [LatexSongParser.sub_group].
   /// [ctx] the parse tree
   void exitSub_group(Sub_groupContext ctx);
@@ -42,7 +38,6 @@ abstract class LatexSongListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexSongParser.keyvaluelist].
   /// [ctx] the parse tree
   void enterKeyvaluelist(KeyvaluelistContext ctx);
-
   /// Exit a parse tree produced by [LatexSongParser.keyvaluelist].
   /// [ctx] the parse tree
   void exitKeyvaluelist(KeyvaluelistContext ctx);
@@ -50,7 +45,6 @@ abstract class LatexSongListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexSongParser.kvelement].
   /// [ctx] the parse tree
   void enterKvelement(KvelementContext ctx);
-
   /// Exit a parse tree produced by [LatexSongParser.kvelement].
   /// [ctx] the parse tree
   void exitKvelement(KvelementContext ctx);
@@ -58,7 +52,6 @@ abstract class LatexSongListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexSongParser.element].
   /// [ctx] the parse tree
   void enterElement(ElementContext ctx);
-
   /// Exit a parse tree produced by [LatexSongParser.element].
   /// [ctx] the parse tree
   void exitElement(ElementContext ctx);
@@ -66,7 +59,6 @@ abstract class LatexSongListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexSongParser.command].
   /// [ctx] the parse tree
   void enterCommand(CommandContext ctx);
-
   /// Exit a parse tree produced by [LatexSongParser.command].
   /// [ctx] the parse tree
   void exitCommand(CommandContext ctx);
@@ -74,7 +66,6 @@ abstract class LatexSongListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexSongParser.song_part].
   /// [ctx] the parse tree
   void enterSong_part(Song_partContext ctx);
-
   /// Exit a parse tree produced by [LatexSongParser.song_part].
   /// [ctx] the parse tree
   void exitSong_part(Song_partContext ctx);

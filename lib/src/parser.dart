@@ -1,4 +1,6 @@
 import 'package:antlr4/antlr4.dart';
+// ignore: implementation_imports
+import 'package:antlr4/src/util/bit_set.dart';
 import 'package:quiver/collection.dart';
 import './part_item.dart';
 
@@ -70,18 +72,52 @@ class CommandStack extends DelegatingList<CommandState> {
   }
 }
 
+class ExitErrorListener extends ErrorListener {
+  final void Function(String msg, int? line, int? charPositionInLine) exit;
+
+  ExitErrorListener(this.exit);
+  @override
+  void reportAmbiguity(Parser recognizer, DFA dfa, int startIndex,
+      int stopIndex, bool exact, BitSet? ambigAlts, ATNConfigSet configs) {}
+
+  @override
+  void reportAttemptingFullContext(Parser recognizer, DFA dfa, int startIndex,
+      int stopIndex, BitSet? conflictingAlts, ATNConfigSet configs) {}
+
+  @override
+  void reportContextSensitivity(Parser recognizer, DFA dfa, int startIndex,
+      int stopIndex, int prediction, ATNConfigSet configs) {}
+
+  @override
+  void syntaxError(
+      Recognizer<ATNSimulator> recognizer,
+      Object? offendingSymbol,
+      int? line,
+      int charPositionInLine,
+      String msg,
+      RecognitionException<IntStream>? e) {
+    print(msg);
+    exit(msg, line, charPositionInLine);
+  }
+}
+
 Future<List<Chordsheet>> parseChordsheets(String path) async {
   final inputstream = await InputStream.fromPath(path);
   final songlexer = song_lexer.LatexSongLexer(inputstream);
   final tokenstream = CommonTokenStream(songlexer);
   final parser = song_parser.LatexSongParser(tokenstream);
   final builder = ChordsheetBuilder();
+  String? error;
+  parser.addErrorListener(ExitErrorListener((msg, line, charPositionInLine) {
+    error = "$path [$line,$charPositionInLine] $msg";
+  }));
   parser.addParseListener(builder);
-  try {
-    parser.prog();
-  } on Exception catch (e) {
-    print(
-        "$path: [${parser.currentToken.line}:${parser.currentToken.charPositionInLine}(${parser.currentToken.text})] ($e)");
+
+  parser.prog();
+
+  if (error != null) {
+    throw Exception(error);
   }
+
   return builder.chordsheets;
 }

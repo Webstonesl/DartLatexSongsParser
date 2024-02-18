@@ -38,9 +38,10 @@ class PartBuilder implements part_listener.LatexPartListener {
 
   @override
   void enterRaised(part_parser.RaisedContext ctx) {
-    final group2 = PartItemGroup(parent: group);
-    group = group2;
+    group = PartItemGroup(parent: group);
+
     group.options["raised"] = true;
+    group.options["transpose"] = true;
   }
 
   @override
@@ -53,6 +54,12 @@ class PartBuilder implements part_listener.LatexPartListener {
   void exitCommand(part_parser.CommandContext ctx) {
     if ((ctx.children ?? []).length == 2) {
       switch (ctx.children![1].text!) {
+        case 'textnote':
+        case 'musicnote':
+          states.addCommand(ctx, (p0) {
+            p0.arguments[0]!.options['note'] = ctx.children![1].text;
+            p0.arguments[0]!.parent = group;
+          }, 1, n);
         case 'versetitle':
           states.addCommand(ctx, (state) {
             states.remove(state);
@@ -181,6 +188,7 @@ class PartBuilder implements part_listener.LatexPartListener {
 
   @override
   void exitPart(part_parser.PartContext ctx) {
+    part!.format();
     if (group is! ChordsheetPart) {
       throw FormatException("Group must end as a ChordsheetPart");
     }
@@ -200,9 +208,7 @@ class PartBuilder implements part_listener.LatexPartListener {
   }
 
   @override
-  void visitErrorNode(ErrorNode node) {
-    // TODO: implement visitErrorNode
-  }
+  void visitErrorNode(ErrorNode node) {}
   void _addText(String text) {
     if (text.contains('\n')) {
       if (RegExp(r'[^\s\n]').hasMatch(text)) {
@@ -234,8 +240,7 @@ class PartBuilder implements part_listener.LatexPartListener {
       switch (node.symbol.type) {
         case part_lexer.LatexPartLexer.TOKEN_PUNCTUATION: // fall through
         case part_lexer.LatexPartLexer.TOKEN_WORD: // fall through
-        case part_lexer.LatexPartLexer.TOKEN_WS: // fall through
-        case part_lexer.LatexPartLexer.TOKEN_CHORD:
+        case part_lexer.LatexPartLexer.TOKEN_WS:
           _addText(node.text!);
           break;
         case part_lexer.LatexPartLexer.TOKEN_METRE_BAR:
@@ -245,13 +250,24 @@ class PartBuilder implements part_listener.LatexPartListener {
   }
 }
 
-void parsePart(Chordsheet chordsheet, String text) {
+void parsePart(Chordsheet chordsheet, String text,
+    [int? line = 0, int charPositionInLine = 0]) {
   final lexer = part_lexer.LatexPartLexer(InputStream.fromString(text));
   final tokenstream = CommonTokenStream(lexer);
   final parser = part_parser.LatexPartParser(tokenstream);
 
   final builder = PartBuilder(parent: chordsheet);
+  Exception? exception;
+
+  parser.addErrorListener(ExitErrorListener((msg, line2, charPositionInLine2) {
+    exception = Exception([
+      msg,
+      line! + line2!,
+      charPositionInLine2! + (line2 == 0 ? charPositionInLine : 0)
+    ]);
+  }));
   parser.addParseListener(builder);
 
   parser.part_();
+  if (exception != null) throw exception!;
 }

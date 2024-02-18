@@ -10,7 +10,6 @@ abstract class LatexPartListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexPartParser.part].
   /// [ctx] the parse tree
   void enterPart(PartContext ctx);
-
   /// Exit a parse tree produced by [LatexPartParser.part].
   /// [ctx] the parse tree
   void exitPart(PartContext ctx);
@@ -18,7 +17,6 @@ abstract class LatexPartListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexPartParser.partcontent].
   /// [ctx] the parse tree
   void enterPartcontent(PartcontentContext ctx);
-
   /// Exit a parse tree produced by [LatexPartParser.partcontent].
   /// [ctx] the parse tree
   void exitPartcontent(PartcontentContext ctx);
@@ -26,7 +24,6 @@ abstract class LatexPartListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexPartParser.element].
   /// [ctx] the parse tree
   void enterElement(ElementContext ctx);
-
   /// Exit a parse tree produced by [LatexPartParser.element].
   /// [ctx] the parse tree
   void exitElement(ElementContext ctx);
@@ -34,7 +31,6 @@ abstract class LatexPartListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexPartParser.raised].
   /// [ctx] the parse tree
   void enterRaised(RaisedContext ctx);
-
   /// Exit a parse tree produced by [LatexPartParser.raised].
   /// [ctx] the parse tree
   void exitRaised(RaisedContext ctx);
@@ -42,7 +38,6 @@ abstract class LatexPartListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexPartParser.command].
   /// [ctx] the parse tree
   void enterCommand(CommandContext ctx);
-
   /// Exit a parse tree produced by [LatexPartParser.command].
   /// [ctx] the parse tree
   void exitCommand(CommandContext ctx);
@@ -50,7 +45,6 @@ abstract class LatexPartListener extends ParseTreeListener {
   /// Enter a parse tree produced by [LatexPartParser.reg_group].
   /// [ctx] the parse tree
   void enterReg_group(Reg_groupContext ctx);
-
   /// Exit a parse tree produced by [LatexPartParser.reg_group].
   /// [ctx] the parse tree
   void exitReg_group(Reg_groupContext ctx);

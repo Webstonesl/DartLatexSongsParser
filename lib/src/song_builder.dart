@@ -17,7 +17,7 @@ class ChordsheetBuilder implements song_listener.LatexSongListener {
   @override
   void exitSong_part(song_parser.Song_partContext ctx) {
     String text = ctx.text;
-    parsePart(chordsheet, text);
+    parsePart(chordsheet, text,ctx.start!.line, ctx.start!.charPositionInLine);
   }
 
   @override
@@ -120,6 +120,7 @@ class ChordsheetBuilder implements song_listener.LatexSongListener {
         }, 1, depth);
 
       case 'musicnote':
+      case 'textnote':
         break;
       default:
         // print("$depth - ${ctx.children![1].text}");
@@ -207,6 +208,7 @@ class ChordsheetBuilder implements song_listener.LatexSongListener {
   @override
   void exitSong(song_parser.SongContext ctx) {
     group = group!.parent;
+    chordsheet.format();
   }
 
   @override

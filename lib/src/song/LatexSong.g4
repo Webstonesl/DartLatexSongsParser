@@ -24,7 +24,7 @@ KV_SEPERATOR: ',';
 EQUALS: [=];
 MANUAL_NEW_LINE: '\\\\';
 WORD: (LETTER+|DIGIT+|[\-]);
-PUNCTUATION: [',:*#()?+];
+PUNCTUATION: [',:*#()?+.];
 ACCIDENTAL: [#&b];
 LETTER: [A-Za-z];
 COMMENT: '%' .*? '\n' -> skip; 
